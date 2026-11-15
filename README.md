@@ -4,9 +4,9 @@ Travel the world with **Chef Cherie**, one city at a time! Customers tell you th
 
 This is a **demo** of a bigger game idea. It includes the first 5 cities, and the full game would keep going with more cities (Seoul, Bangkok, Paris, Mexico City, Mumbai, and more).
 
-**Made by:** Amy _(add your full name and any teammates' names here)_
+**Made by:** Amy Pham
 
-**▶ Play online:** https://YOUR-USERNAME.github.io/cuisine-quest/ _(replace with your GitHub Pages link)_
+**▶ Play online:** https://apham39.github.io/cuisine-quest/_
 
 ![Title screen](screenshots/title.png)
 
