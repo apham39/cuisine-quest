@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cuisine Quest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="viewport">
+  <div id="stage">
+
+    <!-- ===== Restaurant scene (changes with each country) ===== -->
+    <div id="wall"></div>
+    <div id="petals"></div>
+    <svg id="topdeco" viewBox="0 0 1280 100" width="1280" height="100"></svg>
+    <div id="decor"></div>
+    <div id="menu-board"></div>
+
+    <div id="seats">
+      <div class="seat" data-seat="0"></div>
+      <div class="seat" data-seat="1"></div>
+      <div class="seat" data-seat="2"></div>
+    </div>
+
+    <div id="counter">
+      <div class="seat-key" style="left:150px">Q</div>
+      <div class="seat-key" style="left:435px">W</div>
+      <div class="seat-key" style="left:720px">E</div>
+    </div>
+
+    <div id="kitchen">
+      <div id="chef"></div>
+      <div id="chef-say"></div>
+      <div id="tray-area">
+        <div id="tray"></div>
+        <div id="tray-label"></div>
+        <button class="btn small ghost" id="btn-trash">🗑 Trash <kbd class="k">X</kbd></button>
+      </div>
+      <div id="ing-panel"></div>
+    </div>
+
+    <!-- ===== Top bar ===== -->
+    <div id="hud">
+      <div id="hud-level">Level 1 · Hanoi</div>
+      <div class="hud-mid">
+        <div id="hud-money">$0 / $50</div>
+        <div class="goal-bar"><div id="goal-fill"></div></div>
+      </div>
+      <div class="hud-right">
+        <div id="hud-hearts"></div>
+        <button class="icon-btn" id="btn-music" title="Music on/off (M)">🎵</button>
+        <button class="icon-btn" id="btn-pause" title="Pause (P)">⏸</button>
+      </div>
+    </div>
+
+    <div id="fx"></div>
+    <div id="banner"></div>
+    <div id="toast"></div>
+
+    <!-- ===== Screens ===== -->
+    <div class="screen show" id="scr-title">
+      <div class="title-wrap">
+        <div class="title-chef" id="title-chef"></div>
+        <div class="title-text">
+          <div class="logo"><span class="l1">Cuisine</span><span class="l2">Quest!</span></div>
+          <p class="tagline">Travel the world with <b>Chef Cherie</b>, one city at a time!</p>
+          <div class="btn-row left">
+            <button class="btn" id="btn-play">▶ Play</button>
+            <button class="btn secondary" id="btn-how">How to Play</button>
+          </div>
+          <p class="hint">🎵 Turn your sound on!</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="screen" id="scr-levels">
+      <div class="card wide">
+        <h2>Choose a City</h2>
+        <div class="level-cards" id="level-cards"></div>
+        <div class="soon-cards" id="soon-cards"></div>
+        <div class="btn-row">
+          <button class="btn small ghost" id="btn-levels-back">← Back</button>
+          <button class="btn small ghost" id="btn-levels-how">How to Play</button>
+          <button class="btn small ghost" id="btn-reset">Reset progress</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="screen" id="scr-how">
+      <div class="card wide">
+        <h2>How to Play</h2>
+        <div class="how-steps">
+          <div class="how-step"><div class="how-num">1</div><div><b>Read the order.</b><br>Customers only say the dish name. Check the <b>menu board</b> for its ingredients!</div></div>
+          <div class="how-step"><div class="how-num">2</div><div><b>Build the dish.</b><br>Click the ingredients (or press the key on each button). Any order is fine, but no extras!</div></div>
+          <div class="how-step"><div class="how-num">3</div><div><b>Serve it.</b><br>Click the customer (or press <kbd class="k">Q</kbd> <kbd class="k">W</kbd> <kbd class="k">E</kbd> for seat 1, 2, 3).</div></div>
+          <div class="how-step"><div class="how-num">4</div><div><b>Be quick!</b><br>The patience bar shrinks. Faster service = bigger tips.</div></div>
+        </div>
+        <ul class="how-rules">
+          <li><b style="color:#e53935">"NO ___!"</b> means leave that ingredient out. <b style="color:#2e9e44">"ADD ___!"</b> means add that extra.</li>
+          <li>Serve the <b>wrong dish</b> and you lose <b>$5</b>. Not sure? Hit <b>🗑 Trash</b> (or <kbd class="k">X</kbd>) and start over.</li>
+          <li>3 angry customers and the level is over. Fewer angry customers = more ⭐.</li>
+          <li>Pause with <kbd class="k">P</kbd>, music on/off with <kbd class="k">M</kbd>.</li>
+        </ul>
+        <button class="btn" id="btn-how-ok">Got it!</button>
+      </div>
+    </div>
+
+    <div class="screen" id="scr-intro">
+      <div class="card">
+        <div class="lvl-kicker" id="intro-kicker">Level 1</div>
+        <h2 id="intro-title">Hanoi</h2>
+        <p id="intro-text"></p>
+        <div class="intro-dishes" id="intro-dishes"></div>
+        <div class="intro-goal" id="intro-goal"></div>
+        <div><button class="btn" id="btn-intro-go">Start Cooking!</button></div>
+      </div>
+    </div>
+
+    <div class="screen" id="scr-complete">
+      <div class="card">
+        <h2 id="complete-title">Level Complete! 🎉</h2>
+        <div class="stars big" id="complete-stars"></div>
+        <p id="complete-text"></p>
+        <div class="btn-row">
+          <button class="btn secondary" id="btn-complete-levels">Cities</button>
+          <button class="btn" id="btn-next">Next City ▶</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="screen" id="scr-fail">
+      <div class="card">
+        <h2>Oh no! 😵</h2>
+        <p id="fail-text"></p>
+        <div class="btn-row">
+          <button class="btn secondary" id="btn-fail-levels">Cities</button>
+          <button class="btn" id="btn-retry">Try Again</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="screen" id="scr-pause">
+      <div class="card">
+        <h2>Paused</h2>
+        <div class="btn-col">
+          <button class="btn" id="btn-resume">Resume</button>
+          <button class="btn secondary" id="btn-restart">Restart Level</button>
+          <button class="btn ghost" id="btn-quit">Quit to Cities</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="screen" id="scr-win">
+      <div class="card review">
+        <div class="review-head">
+          <div class="critic-mini" id="win-critic"></div>
+          <div>
+            <div class="review-kicker">THE DAILY FORK · RESTAURANT REVIEW</div>
+            <h2>Chef Cherie's Kitchen</h2>
+            <div class="stars big"><span class="on">★</span><span class="on">★</span><span class="on">★</span><span class="on">★</span><span class="on">★</span></div>
+          </div>
+        </div>
+        <p class="review-quote">"From pho in Hanoi to milkshakes in New York, Chef Cherie served the whole world with a smile. Truly a five-star quest!"</p>
+        <p id="win-text"></p>
+        <div class="demo-end">🌍 End of demo! More cities coming soon...</div>
+        <div class="btn-row">
+          <button class="btn secondary" id="btn-win-levels">Cities</button>
+          <button class="btn" id="btn-win-title">Play Again</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script src="game.js"></script>
+</body>
+</html>
